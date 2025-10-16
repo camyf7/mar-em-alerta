@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mar em Alerta - Segurança Costeira</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="screen active">
+    <div class="splash-content">
+      <div class="logo-container">
+        <svg class="app-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Wave design logo -->
+          <circle cx="60" cy="60" r="58" fill="#4193A6" opacity="0.1"/>
+          <path d="M 20 60 Q 30 45, 40 60 T 60 60 T 80 60 T 100 60" stroke="#38A6A6" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M 20 70 Q 30 55, 40 70 T 60 70 T 80 70 T 100 70" stroke="#93BBBF" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="60" cy="35" r="8" fill="#F2E6D0"/>
+          <path d="M 60 43 L 55 50 L 65 50 Z" fill="#F2E6D0"/>
+        </svg>
+      </div>
+      <h1 class="splash-title">Mar em Alerta</h1>
+      <p class="splash-subtitle">Sua segurança costeira</p>
+      <div class="wave-loader">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App Container -->
+  <div id="app-container" class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <svg class="header-logo" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 8 20 Q 12 15, 16 20 T 24 20 T 32 20" stroke="#38A6A6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M 8 26 Q 12 21, 16 26 T 24 26 T 32 26" stroke="#93BBBF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="20" cy="12" r="3" fill="#F2E6D0"/>
+        </svg>
+        <h2 class="header-title">Mar em Alerta</h2>
+      </div>
+      <button class="notification-btn" id="notification-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+    </header>
+
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen">
+      <div class="screen-content">
+        <div class="alert-status-card">
+          <div class="status-icon status-green">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="status-info">
+            <h3>Condições Normais</h3>
+            <p>Nenhum alerta ativo no momento</p>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button class="action-card" data-screen="alerts-screen">
+            <div class="action-icon" style="background: linear-gradient(135deg, #4193A6, #38A6A6);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <span>Alertas</span>
+          </button>
+
+          <button class="action-card" data-screen="map-screen">
+            <div class="action-icon" style="background: linear-gradient(135deg, #38A6A6, #93BBBF);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <span>Mapa</span>
+          </button>
+
+          <button class="action-card" data-screen="community-screen">
+            <div class="action-icon" style="background: linear-gradient(135deg, #93BBBF, #4193A6);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <span>Comunidade</span>
+          </button>
+
+          <button class="action-card" data-screen="safety-screen">
+            <div class="action-icon" style="background: linear-gradient(135deg, #38A6A6, #4193A6);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <span>Dicas</span>
+          </button>
+        </div>
+
+        <div class="recent-alerts">
+          <h3>Alertas Recentes</h3>
+          <div class="alert-item alert-yellow">
+            <div class="alert-item-icon">⚠️</div>
+            <div class="alert-item-content">
+              <h4>Maré Alta - Atenção</h4>
+              <p>Praia do Forte • Há 2 horas</p>
+            </div>
+          </div>
+          <div class="alert-item alert-green">
+            <div class="alert-item-icon">✓</div>
+            <div class="alert-item-content">
+              <h4>Condições Normais</h4>
+              <p>Praia de Copacabana • Há 5 horas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alerts Screen -->
+    <div id="alerts-screen" class="screen">
+      <div class="screen-content">
+        <div class="screen-header">
+          <button class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <h2>Alertas Ativos</h2>
+        </div>
+
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">Todos</button>
+          <button class="filter-tab" data-filter="red">Alto Risco</button>
+          <button class="filter-tab" data-filter="yellow">Atenção</button>
+          <button class="filter-tab" data-filter="green">Normal</button>
+        </div>
+
+        <div class="alerts-list">
+          <div class="alert-card alert-red" data-type="red">
+            <div class="alert-card-header">
+              <div class="alert-badge badge-red">ALTO RISCO</div>
+              <span class="alert-time">Há 30 min</span>
+            </div>
+            <h3>Tempestade Severa Aproximando</h3>
+            <p>Ventos fortes e ondas de até 3 metros. Evite áreas costeiras.</p>
+            <div class="alert-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Praia de Ipanema, Rio de Janeiro
+            </div>
+          </div>
+
+          <div class="alert-card alert-yellow" data-type="yellow">
+            <div class="alert-card-header">
+              <div class="alert-badge badge-yellow">ATENÇÃO</div>
+              <span class="alert-time">Há 2 horas</span>
+            </div>
+            <h3>Maré Alta - Cuidado</h3>
+            <p>Maré acima do normal. Mantenha distância da água.</p>
+            <div class="alert-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Praia do Forte, Salvador
+            </div>
+          </div>
+
+          <div class="alert-card alert-green" data-type="green">
+            <div class="alert-card-header">
+              <div class="alert-badge badge-green">NORMAL</div>
+              <span class="alert-time">Há 5 horas</span>
+            </div>
+            <h3>Condições Favoráveis</h3>
+            <p>Mar calmo e condições ideais para atividades na praia.</p>
+            <div class="alert-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Praia de Copacabana, Rio de Janeiro
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Screen -->
+    <div id="map-screen" class="screen">
+      <div class="screen-content">
+        <div class="screen-header">
+          <button class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <h2>Mapa de Alertas</h2>
+        </div>
+
+        <div class="map-container">
+          <div class="map-placeholder">
+            <svg width="100%" height="100%" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- Simplified map illustration -->
+              <rect width="400" height="300" fill="#93BBBF" opacity="0.2"/>
+              <path d="M 0 200 Q 100 180, 200 200 T 400 200 L 400 300 L 0 300 Z" fill="#F2E6D0"/>
+              <path d="M 0 210 Q 100 190, 200 210 T 400 210" stroke="#D9CEBA" stroke-width="2" fill="none"/>
+              
+              <!-- Alert pins -->
+              <g class="map-pin" transform="translate(120, 150)">
+                <circle cx="0" cy="0" r="20" fill="#ef4444" opacity="0.3"/>
+                <circle cx="0" cy="0" r="12" fill="#ef4444"/>
+                <path d="M 0 -8 L -4 2 L 4 2 Z" fill="white"/>
+              </g>
+              
+              <g class="map-pin" transform="translate(250, 180)">
+                <circle cx="0" cy="0" r="20" fill="#eab308" opacity="0.3"/>
+                <circle cx="0" cy="0" r="12" fill="#eab308"/>
+                <text x="0" y="5" text-anchor="middle" fill="white" font-size="14" font-weight="bold">!</text>
+              </g>
+              
+              <g class="map-pin" transform="translate(320, 160)">
+                <circle cx="0" cy="0" r="20" fill="#22c55e" opacity="0.3"/>
+                <circle cx="0" cy="0" r="12" fill="#22c55e"/>
+                <path d="M -3 0 L 0 3 L 5 -4" stroke="white" stroke-width="2" fill="none"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="map-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background: #ef4444;"></div>
+              <span>Alto Risco</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #eab308;"></div>
+              <span>Atenção</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #22c55e;"></div>
+              <span>Normal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-info-cards">
+          <div class="info-card">
+            <h4>Praia de Ipanema</h4>
+            <div class="info-status status-red">Alto Risco - Tempestade</div>
+          </div>
+          <div class="info-card">
+            <h4>Praia do Forte</h4>
+            <div class="info-status status-yellow">Atenção - Maré Alta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Community Screen -->
+    <div id="community-screen" class="screen">
+      <div class="screen-content">
+        <div class="screen-header">
+          <button class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <h2>Comunidade</h2>
+        </div>
+
+        <div class="community-stats">
+          <div class="stat-card">
+            <div class="stat-number">1,234</div>
+            <div class="stat-label">Membros Ativos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">89</div>
+            <div class="stat-label">Mensagens Hoje</div>
+          </div>
+        </div>
+
+        <div class="message-input-container">
+          <input type="text" class="message-input" placeholder="Compartilhe informações com a comunidade...">
+          <button class="send-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+
+        <div class="messages-list">
+          <div class="message-card">
+            <div class="message-avatar">MR</div>
+            <div class="message-content">
+              <div class="message-header">
+                <span class="message-author">Maria Rodrigues</span>
+                <span class="message-time">Há 15 min</span>
+              </div>
+              <p>Pessoal, a maré está subindo rápido na Praia do Forte. Cuidado com as crianças!</p>
+              <div class="message-actions">
+                <button class="message-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                  </svg>
+                  <span>24</span>
+                </button>
+                <button class="message-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>5</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="message-card">
+            <div class="message-avatar">JS</div>
+            <div class="message-content">
+              <div class="message-header">
+                <span class="message-author">João Silva</span>
+                <span class="message-time">Há 1 hora</span>
+              </div>
+              <p>Acabei de voltar da praia. Condições ótimas em Copacabana! 🌊☀️</p>
+              <div class="message-actions">
+                <button class="message-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                  </svg>
+                  <span>42</span>
+                </button>
+                <button class="message-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>8</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="message-card">
+            <div class="message-avatar">AC</div>
+            <div class="message-content">
+              <div class="message-header">
+                <span class="message-author">Ana Costa</span>
+                <span class="message-time">Há 3 horas</span>
+              </div>
+              <p>Alguém sabe se a previsão de tempestade para amanhã ainda está mantida?</p>
+              <div class="message-actions">
+                <button class="message-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                  </svg>
+                  <span>15</span>
+                </button>
+                <button class="message-action">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span>12</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Safety Tips Screen -->
+    <div id="safety-screen" class="screen">
+      <div class="screen-content">
+        <div class="screen-header">
+          <button class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <h2>Dicas de Segurança</h2>
+        </div>
+
+        <div class="emergency-card">
+          <h3>Contatos de Emergência</h3>
+          <div class="emergency-contacts">
+            <a href="tel:190" class="emergency-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <div class="emergency-label">Polícia</div>
+                <div class="emergency-number">190</div>
+              </div>
+            </a>
+            <a href="tel:193" class="emergency-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <div class="emergency-label">Bombeiros</div>
+                <div class="emergency-number">193</div>
+              </div>
+            </a>
+            <a href="tel:192" class="emergency-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <div class="emergency-label">SAMU</div>
+                <div class="emergency-number">192</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="tips-list">
+          <div class="tip-card">
+            <div class="tip-icon">🌊</div>
+            <div class="tip-content">
+              <h4>Durante Maré Alta</h4>
+              <ul>
+                <li>Mantenha distância segura da água</li>
+                <li>Não entre no mar durante alertas</li>
+                <li>Observe as placas de sinalização</li>
+                <li>Fique atento às ondas grandes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">⛈️</div>
+            <div class="tip-content">
+              <h4>Durante Tempestades</h4>
+              <ul>
+                <li>Saia imediatamente da água</li>
+                <li>Procure abrigo seguro</li>
+                <li>Evite áreas abertas e árvores</li>
+                <li>Não use guarda-chuvas metálicos</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">🏊</div>
+            <div class="tip-content">
+              <h4>Segurança ao Nadar</h4>
+              <ul>
+                <li>Nade apenas em áreas sinalizadas</li>
+                <li>Nunca nade sozinho</li>
+                <li>Respeite as bandeiras de sinalização</li>
+                <li>Cuidado com correntes de retorno</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">👨‍👩‍👧‍👦</div>
+            <div class="tip-content">
+              <h4>Com Crianças</h4>
+              <ul>
+                <li>Supervisione constantemente</li>
+                <li>Use coletes salva-vidas</li>
+                <li>Ensine sobre os perigos do mar</li>
+                <li>Estabeleça um ponto de encontro</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Screen -->
+    <div id="profile-screen" class="screen">
+      <div class="screen-content">
+        <div class="screen-header">
+          <button class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <h2>Perfil</h2>
+        </div>
+
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <h3>Usuário</h3>
+          <p>usuario@email.com</p>
+        </div>
+
+        <div class="settings-section">
+          <h4>Notificações</h4>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Alertas de Alto Risco</div>
+              <div class="setting-description">Receba notificações imediatas</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Alertas de Atenção</div>
+              <div class="setting-description">Avisos de condições moderadas</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Mensagens da Comunidade</div>
+              <div class="setting-description">Atualizações de outros usuários</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4>Preferências</h4>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Localização Favorita</div>
+              <div class="setting-description">Praia de Copacabana</div>
+            </div>
+            <button class="setting-action">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Idioma</div>
+              <div class="setting-description">Português (Brasil)</div>
+            </div>
+            <button class="setting-action">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="logout-btn">Sair da Conta</button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-screen="home-screen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Início</span>
+      </button>
+      <button class="nav-item" data-screen="alerts-screen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+        </svg>
+        <span>Alertas</span>
+      </button>
+      <button class="nav-item" data-screen="map-screen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+        </svg>
+        <span>Mapa</span>
+      </button>
+      <button class="nav-item" data-screen="community-screen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        </svg>
+        <span>Comunidade</span>
+      </button>
+      <button class="nav-item" data-screen="profile-screen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"></path>
+        </svg>
+        <span>Perfil</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
